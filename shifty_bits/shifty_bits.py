@@ -79,17 +79,17 @@ for case_num in range(cases):
         start = int(args[1])
         end = start + int(args[2])
 
-        if args[0] == "int":
+        if data_type == "int":
             num = get_signed_bits(data, start, end)
             print(num)
-        elif args[0] == "uint":
+        elif data_type == "uint":
             num = get_bits(data, start, end)
             print(num)
-        elif args[0] == "float":
+        elif data_type == "float":
             bits = get_bits(data, start, end)
             num = struct.unpack("f", struct.pack("I", bits))[0] # POTENTIAL ERROR: if the wrong number of bits is given, but that shouldn't happen
             print(format_float(num))
-        elif args[0] == "double":
+        elif data_type == "double":
             bits = get_bits(data, start, end)
             num = struct.unpack("d", struct.pack("Q", bits))[0] # POTENTIAL ERROR: if the wrong number of bits is given, but that shouldn't happen
             print(format_float(num))
