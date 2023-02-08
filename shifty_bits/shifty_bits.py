@@ -14,6 +14,7 @@ def get_bits(num: int, start: int, end: int) -> int:
 
     return (num >> start) & mask # bitshift to get rid of right bits, then mask to get rid of left bits
 
+
 def get_signed_bits(num: int, start: int, end: int) -> int:
     '''Get the specific bits of a number, and treat it as a two's compliment signed int. `start` and `end` are offsets from the right.'''
 
@@ -26,42 +27,18 @@ def get_signed_bits(num: int, start: int, end: int) -> int:
 
     return result + (-sign_weight * negative)
 
+
 def format_float(num: float) -> str:
     if abs(num) > 99999.99999 or abs(num) < 0.00001:
-        operator: str
-        result = f"{num:.5e}"
-        if "+" in result:
-            result = result.split("+")
-            operator = "+"
-        elif "-" in result[1:]:
-            sign = "-" if result[0] == "-" else ""
-            result = result.split("-")
-            result[0] = sign + result[0]
-            operator = "-"
-        else:
-            raise ValueError(" this shouldn't happen")
-        if len(result[1]) < 3: # error here, somehow???
-            result[1] = "0" + result[1]
-        result[1] = operator + result[1]
-        return result[0] + result[1]
+        result = f"{num:.5e}".split("e")
+
+        if len(result[1]) == 3:
+            result[1] = result[1][0] + "0" + result[1][1:]
+
+        return result[0] + "e" + result[1]
     else:
         return f"{num:.5f}"
 
-# version that strips trailing zeroes
-# def format_float(num: float) -> str:
-#     if abs(num) > 99999.99999 or abs(num) < 0.00001:
-#         result = f"{num:.5e}".split("+")
-#         if len(result[1]) < 3:
-#             result[1] = "0" + result[1]
-#         result[1] = "+" + result[1]
-#         if "." in result[0]:
-#             result[0] = result[0].rstrip("0")
-#         return result[0] + result[1]
-#     else:
-#         result = f"{num:.5f}"
-#         if "." in result:
-#             result = result.rstrip("0")
-#         return result
 
 cases = int(sys.stdin.readline().rstrip())
 
