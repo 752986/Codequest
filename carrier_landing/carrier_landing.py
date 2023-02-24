@@ -6,7 +6,7 @@ cases = int(sys.stdin.readline().rstrip())
 
 class Point:
     def __init__(self, coords: str) -> None:
-        
+        pass
 
 for case_num in range(cases):
     n_planes = int(sys.stdin.readline().rstrip())

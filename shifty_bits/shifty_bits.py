@@ -14,7 +14,6 @@ def get_bits(num: int, start: int, end: int) -> int:
 
     return (num >> start) & mask # bitshift to get rid of right bits, then mask to get rid of left bits
 
-
 def get_signed_bits(num: int, start: int, end: int) -> int:
     '''Get the specific bits of a number, and treat it as a two's compliment signed int. `start` and `end` are offsets from the right.'''
 
@@ -27,6 +26,12 @@ def get_signed_bits(num: int, start: int, end: int) -> int:
 
     return result + (-sign_weight * negative)
 
+
+def custom_round(number: float, ndigits: int = 0) -> float:
+    number *= 10**ndigits
+    result = int(number + (0.5 if number >= 0 else -0.5))
+    return result / 10**ndigits
+    
 
 def format_float(num: float) -> str:
     if abs(num) > 99999.99999 or abs(num) < 0.00001:
@@ -43,8 +48,9 @@ def format_float(num: float) -> str:
 cases = int(sys.stdin.readline().rstrip())
 
 for case_num in range(cases):
-    data = sys.stdin.readline().rstrip().removeprefix("0x")
-    data = int(data, 16)
+    hex_in = sys.stdin.readline().rstrip().removeprefix("0x")
+    data = int(hex_in, 16)
+    print(bin(data))
     n_data = int(sys.stdin.readline().rstrip())
 
     for i in range(n_data):
