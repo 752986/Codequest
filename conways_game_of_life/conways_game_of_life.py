@@ -1,3 +1,5 @@
+import copy
+
 def inbounds(coord: tuple[int, int]) -> bool:
 	x, y = coord
 	return (x >= 0 and y >= 0 and x < 10 and y < 10)
@@ -16,7 +18,7 @@ for case_num in range(cases):
 	map = [[n == '1' for n in input().rstrip()] for _ in range(10)]
 
 	for _ in range(n_gens):
-		working = map.copy()
+		working = copy.deepcopy(map)
 
 		for y, row in enumerate(map):
 			for x in range(len(row)):
@@ -43,7 +45,7 @@ for case_num in range(cases):
 				else:
 					working[y][x] = False # the cell is overpopulated
 		
-		map = working.copy()
+		map = working
 
-		# print_map(map)
-		# print()
+	print_map(map)
+	# print()
