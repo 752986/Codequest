@@ -11,13 +11,11 @@ for case_num in range(cases):
     if a == b:
         anagram = False
     else:
-        for char in a:
-            if char in b:
-                a.remove(char)
-                b.remove(char)
-            else:
-                anagram = False
-                break
+        a.sort()
+        b.sort()
+
+        if a != b:
+            anagram = False
     
     if anagram:
         print(line + " = ANAGRAM")
