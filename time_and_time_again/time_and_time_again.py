@@ -27,4 +27,4 @@ for case_num in range(cases):
 		current_char += 1
 
 
-	print(f"{hours:}:{minutes:}:{seconds:}")
+	print(f"{hours}:{minutes}:{seconds}")
