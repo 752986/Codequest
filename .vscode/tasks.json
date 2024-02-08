@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Download Codequest problem",
+			"command": "python create.py ${input:codequestProblemName}",
+			"type": "shell",
+			"group": "none",
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "codequestProblemName",
+			"type": "promptString",
+			"description": "Give the problem name, as it is formatted in its URL.",
+		}
+	]
+}
