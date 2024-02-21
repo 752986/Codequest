@@ -21,7 +21,7 @@ class Tile:
 		return Tile(True, False) if self.one else Tile(False, True)
 	
 	def __str__(self) -> str:
-		return f"{"0" if self.zero else "."}{"1" if self.one else "."}"
+		return f"{"0" if self.zero else "-"}{"1" if self.one else "-"}"
 	
 	def __repr__(self) -> str:
 		return str(self)
@@ -46,7 +46,7 @@ class Board:
 			return self
 
 		def __next__(self) -> Tile:
-			result = self.board[i, j]
+			result = self.board[self.i, self.j]
 
 			self.j = (self.j + 1) % self.board.size
 			if self.j == 0:
@@ -63,6 +63,9 @@ class Board:
 	def __init__(self, size: int):
 		self.data = [[Tile() for _ in range(size)] for _ in range(size)]
 		self.size = size
+
+	def isValid(self) -> bool:
+		pass #TODO!
 	
 	def __str__(self) -> str:
 		result = ""
@@ -87,7 +90,7 @@ class Board:
 		assert self.size == other.size
 
 		for tile, otherTile in zip(self, other):
-			if tile == otherTile:
+			if tile != otherTile:
 				return False
 		
 		return True
@@ -117,6 +120,7 @@ for case_num in range(cases):
 	changed = True
 	prev = deepcopy(board)
 	while changed:
+		# check and cap 2 in a row hoizontal
 		for i in range(board.size):
 			for j in range(board.size):
 				if j > 0:
@@ -127,6 +131,7 @@ for case_num in range(cases):
 							if j + 1 < board.size:
 								board[i, j+1] = board[i, j].opposite()
 
+		# check and cap 2 in a row vertical
 		for i in range(board.size):
 			for j in range(board.size):
 				if i > 0:
